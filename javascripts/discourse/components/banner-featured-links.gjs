@@ -67,9 +67,9 @@ export default class BannerFeaturedLinks extends Component {
                 (concat "bfl-link-" index)
                 (if link.button_identifier link.button_identifier)
               }}
-              href="{{link.url}}"
-              target="{{link.target}}"
-              alt="{{htmlSafe link.text}}"
+              href={{link.url}}
+              target={{link.target}}
+              alt={{htmlSafe link.text}}
             >
               {{#if link.emoji}}
                 {{replaceEmoji link.emoji}}

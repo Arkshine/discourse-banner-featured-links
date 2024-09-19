@@ -8,8 +8,6 @@ module(
       const settings = new Map(Object.entries({ show_on: "" }));
       const result = migrate(settings);
 
-      console.log("settings", Object.entries({ show_on: "" }), settings);
-
       const expectedResult = new Map(
         Object.entries({
           display_on_homepage: true,
