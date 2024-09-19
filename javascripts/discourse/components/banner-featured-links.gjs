@@ -8,8 +8,11 @@ import { defaultHomepage } from "discourse/lib/utilities";
 import htmlSafe from "discourse-common/helpers/html-safe";
 
 export default class BannerFeaturedLinks extends Component {
+  @service currentUser;
   @service router;
   @service siteSettings;
+  @service site;
+
   @tracked featuredLinks = settings.links;
 
   get showOnRoute() {
@@ -35,9 +38,26 @@ export default class BannerFeaturedLinks extends Component {
     return false;
   }
 
+  get displayForUser() {
+    return (
+      (settings.show_for_members && this.currentUser) ||
+      (settings.show_for_anon && !this.currentUser)
+    );
+  }
+
+  get displayOnDevice() {
+    return (
+      (settings.display_on_desktop && this.site.desktopView) ||
+      (settings.display_on_mobile && this.site.mobileView)
+    );
+  }
+
+  get shoudlDisplay() {
+    return this.displayForUser && this.displayOnDevice && this.showOnRoute;
+  }
+
   <template>
-    {{log this}}
-    {{#if this.showOnRoute}}
+    {{#if this.shoudlDisplay}}
       <aside class="banner-featured-links__wrapper {{settings.plugin_outlet}}">
         <nav class="banner-featured-links__wrapper-links">
           {{#each this.featuredLinks as |link index|}}

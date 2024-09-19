@@ -5,8 +5,8 @@ en:
         description: |
           Text links to be displayed in the header.
           <br><br><br>
-          <h2>Location</h2>
-          You can choose specific pages and various places to display the links on.
+          <h2>User</h2>
+          You can choose who can access the links and on which devices they should be displayed.
         schema:
           properties:
             emoji:
@@ -59,6 +59,23 @@ en:
                 A custom CSS class to apply to the button.
                 Useful if you want to style the button differently and the settings are not enough.
                 You can target with <code>.banner-featured-links__link.your-classname {}</code>
+      show_for_members:
+        description: |
+          Display the links for logged-in users.
+      show_for_anon:
+        description: |
+          Display the links for anonymous users.
+      display_on_mobile:
+        description: |
+          Display the links on mobile devices.
+      display_on_desktop:
+        description: |
+          Display the links on desktop computers.
+          <br><br><br>
+          <span class="desc" style="display:block;margin-left:-1.5em">
+          <h2>Location</h2>
+          You can choose specific pages and various places to display the links on.
+          </span>
       display_on_homepage:
         description: >
           Displays the links on the homepage.

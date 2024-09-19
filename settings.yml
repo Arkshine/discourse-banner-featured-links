@@ -65,6 +65,18 @@ links:
       button_identifier:
         type: string
         default: ""
+show_for_members:
+  type: bool
+  default: true
+show_for_anon:
+  type: bool
+  default: true
+display_on_mobile:
+  type: bool
+  default: true
+display_on_desktop:
+  type: bool
+  default: true
 display_on_homepage:
   type: bool
   default: true
