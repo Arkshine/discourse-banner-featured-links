@@ -36,7 +36,7 @@ acceptance("Banned Featured Links", function (needs) {
     plugin_outlet: "above-site-header",
   });
 
-  test("it renders the banner", async function (assert) {
+  test("it renders the links", async function (assert) {
     await visit("/");
 
     assert
@@ -72,28 +72,46 @@ acceptance("Banned Featured Links", function (needs) {
       );
   });
 
-  test("it renders the banner on the right route", async function (assert) {
-    settings.show_on = "homepage";
+  test("it renders the links on the homepage", async function (assert) {
+    settings.display_on_homepage = true;
+    settings.url_must_contain = "";
+
     await visit("/");
-    assert
-      .dom(".banner-featured-links__wrapper")
-      .exists("homepage / The banner is present");
 
-    await visit("/t/internationalization-localization/280");
     assert
       .dom(".banner-featured-links__wrapper")
-      .doesNotExist("homepage / topic / The banner is not present");
+      .exists("shows the banner on the homepage");
+  });
 
-    settings.show_on = "everywhere";
-    await visit("/latest");
-    assert
-      .dom(".banner-featured-links__wrapper")
-      .exists("everywhere / The banner is present");
+  test("it doesn't render the links on the homepage", async function (assert) {
+    settings.display_on_homepage = false;
+    settings.url_must_contain = "";
 
-    settings.show_on = "top-menu";
-    await visit("/categories");
+    await visit("/");
+
     assert
       .dom(".banner-featured-links__wrapper")
-      .exists("top-menu / categories / The banner is present");
+      .doesNotExist("hides the banner on the homepage");
+  });
+
+  test("it renders the links on a set route", async function (assert) {
+    settings.display_on_homepage = false;
+    settings.url_must_contain = "/c/*";
+
+    await visit("/c/1");
+    assert
+      .dom(".banner-featured-links__wrapper")
+      .exists("shows the banner on the /c/* route");
+  });
+
+  test("it doesn't render the links on other routes", async function (assert) {
+    settings.display_on_homepage = false;
+    settings.url_must_contain = "/c/*";
+
+    await visit("/u");
+
+    assert
+      .dom(".banner-box")
+      .doesNotExist("does not show the banner on the /u route");
   });
 });

@@ -65,16 +65,13 @@ links:
       button_identifier:
         type: string
         default: ""
-show_on:
-  default: homepage
-  type: enum
-  choices:
-    - everywhere
-    - homepage
-    - top-menu
-    - latest
-    - categories
-    - top
+display_on_homepage:
+  type: bool
+  default: true
+url_must_contain:
+  type: list
+  list_type: simple
+  default: /latest|/categories|/new|/unread|/top*|/tag/*|/tags/*|/c/*|/t/*
 plugin_outlet:
   default: above-main-container
   type: string

@@ -13,28 +13,30 @@ export default class BannerFeaturedLinks extends Component {
   @tracked featuredLinks = settings.links;
 
   get showOnRoute() {
-    const currentRoute = this.router.currentRouteName;
-    switch (settings.show_on) {
-      case "everywhere":
-        return !currentRoute.includes("admin");
-      case "homepage":
-        return currentRoute === `discovery.${defaultHomepage()}`;
-      case "top-menu":
-        const topMenu = this.siteSettings.top_menu;
-        const targets = topMenu.split("|").map((opt) => `discovery.${opt}`);
-        return targets.includes(currentRoute);
-      case "latest":
-        return currentRoute === `discovery.latest`;
-      case "categories":
-        return currentRoute === `discovery.categories`;
-      case "top":
-        return currentRoute === `discovery.top`;
-      default:
-        return false;
+    if (
+      settings.display_on_homepage &&
+      this.router.currentRouteName === `discovery.${defaultHomepage()}`
+    ) {
+      return true;
     }
+
+    if (settings.url_must_contain.length) {
+      const path = this.router.currentURL;
+      const allowedPaths = settings.url_must_contain.split("|");
+
+      return allowedPaths.some((allowedPath) => {
+        if (allowedPath.slice(-1) === "*") {
+          return path.indexOf(allowedPath.slice(0, -1)) === 0;
+        }
+        return path === allowedPath;
+      });
+    }
+
+    return false;
   }
 
   <template>
+    {{log this}}
     {{#if this.showOnRoute}}
       <aside class="banner-featured-links__wrapper {{settings.plugin_outlet}}">
         <nav class="banner-featured-links__wrapper-links">

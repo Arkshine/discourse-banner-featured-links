@@ -59,10 +59,13 @@ en:
                 A custom CSS class to apply to the button.
                 Useful if you want to style the button differently and the settings are not enough.
                 You can target with <code>.banner-featured-links__link.your-classname {}</code>
-      show_on:
+      display_on_homepage:
         description: >
-          The pages to display the links on.
-          <code>top_menu</code> refers to the <a href="/admin/site_settings/category/all_results?filter=top_menu">top menu site.
+          Displays the links on the homepage.
+      url_must_contain:
+        description: >
+          Enter paths that should display the banner. <br>
+          Add <code>*</code> to the end of the path as a wildcard.
       plugin_outlet:
         description: |
           The location to display the links.<br>
