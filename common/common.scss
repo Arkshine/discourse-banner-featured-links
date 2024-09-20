@@ -58,6 +58,10 @@ $parsedSettings: parseObjectSettings($links);
       @include apply-if-not-empty(color, $button_color_hover);
     }
 
+    &:visited {
+      @include apply-if-not-empty(color, $button_color);
+    }
+
     @for $index from 1 through length($parsedSettings) {
       $item: nth($parsedSettings, $index);
       $identifier: #{map-get($item, "button_identifier")};
