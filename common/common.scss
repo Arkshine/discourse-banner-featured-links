@@ -40,7 +40,7 @@ $parsedSettings: parseObjectSettings($links);
     display: flex;
     justify-content: center;
     align-items: center;
-    column-gap: 0.5em;    
+    column-gap: 0.5em;
     flex: 0 0 auto;
     text-wrap: nowrap;
 
@@ -50,7 +50,7 @@ $parsedSettings: parseObjectSettings($links);
     @include apply-if-not-empty(border, $button_border);
     @include apply-if-not-empty(box-shadow, $button_shadow);
     @include apply-if-not-empty(color, $button_color);
-    @include apply-if-not-empty(background-color, $button_background);   
+    @include apply-if-not-empty(background-color, $button_background);
 
     &:hover {
       @include apply-if-not-empty(background-color, $button_background_hover);
@@ -65,22 +65,40 @@ $parsedSettings: parseObjectSettings($links);
       @if $identifier == "" {
         $identifier: "bfl-link-#{$index - 1}";
       }
-      
+
       &.#{$identifier} {
         @include apply-if-not-empty(flex-basis, map-get($item, "button_width"));
         @include apply-if-not-empty(font, map-get($item, "button_font"));
         @include apply-if-not-empty(padding, map-get($item, "button_padding"));
-        @include apply-if-not-empty(border-radius, map-get($item, "button_rounding"));
-        @include apply-if-not-empty(background-color, map-get($item, "button_background"));
+        @include apply-if-not-empty(
+          border-radius,
+          map-get($item, "button_rounding")
+        );
+        @include apply-if-not-empty(
+          background-color,
+          map-get($item, "button_background")
+        );
         @include apply-if-not-empty(color, map-get($item, "button_color"));
         @include apply-if-not-empty(border, map-get($item, "button_border"));
-        @include apply-if-not-empty(box-shadow, map-get($item, "button_shadow"));
+        @include apply-if-not-empty(
+          box-shadow,
+          map-get($item, "button_shadow")
+        );
       }
 
       &.#{$identifier}:hover {
-        @include apply-if-not-empty(background-color, map-get($item, "button_background_hover"));
-        @include apply-if-not-empty(border, map-get($item, "button_border_hover"));
-        @include apply-if-not-empty(color, map-get($item, "button_color_hover"));
+        @include apply-if-not-empty(
+          background-color,
+          map-get($item, "button_background_hover")
+        );
+        @include apply-if-not-empty(
+          border,
+          map-get($item, "button_border_hover")
+        );
+        @include apply-if-not-empty(
+          color,
+          map-get($item, "button_color_hover")
+        );
       }
     }
   }
