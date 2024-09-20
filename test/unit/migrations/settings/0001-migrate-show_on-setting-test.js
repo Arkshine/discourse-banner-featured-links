@@ -2,7 +2,7 @@ import { module, test } from "qunit";
 import migrate from "../../../../migrations/settings/0001-migrate-show_on-setting";
 
 module(
-  "Banner Featured Links | Unit | Migrations | Settings | 0001-migrate-links-setting",
+  "Banner Featured Links | Unit | Migrations | Settings | 0001-migrate-show_on-setting",
   function () {
     test("migrate when old setting is a blank string", function (assert) {
       const settings = new Map(Object.entries({ show_on: "" }));

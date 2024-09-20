@@ -1,20 +1,21 @@
 @import "functions";
 
+@mixin apply-if-not-empty($property, $value) {
+  @if $value != "" and $value != null {
+    #{$property}: #{$value};
+  }
+}
+
 $parsedSettings: parseObjectSettings($links);
 
 .banner-featured-links {
   &__wrapper {
-    margin: #{$buttons_wrapper_margin};
-    max-width: #{$buttons_wrapper_max_width};
+    @include apply-if-not-empty(margin, $buttons_wrapper_margin);
+    @include apply-if-not-empty(max-width, $buttons_wrapper_max_width);
 
     @include breakpoint(mobile-extra-large) {
-      @if $mobile_buttons_wrapper_max_width != "" {
-        margin: #{$mobile_buttons_wrapper_margin};
-      }
-
-      @if $mobile_buttons_wrapper_max_width != "" {
-        max-width: #{$mobile_buttons_wrapper_max_width};
-      }
+      @include apply-if-not-empty(margin, $mobile_buttons_wrapper_max_width);
+      @include apply-if-not-empty(max-width, $mobile_buttons_wrapper_max_width);
     }
   }
 
@@ -22,15 +23,16 @@ $parsedSettings: parseObjectSettings($links);
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-    justify-content: #{$buttons_justify};
-    gap: #{$buttons_gap};
-    font-size: #{$buttons_font_size};
+
+    @include apply-if-not-empty(justify-content, $buttons_justify);
+    @include apply-if-not-empty(gap, $buttons_gap);
+    @include apply-if-not-empty(font, $buttons_font);
 
     @include breakpoint(mobile-extra-large) {
-      flex-direction: #{$mobile_buttons_direction};
-      justify-content: #{$mobile_buttons_justify};
-      gap: #{$mobile_buttons_gap};
-      font-size: #{$mobile_buttons_font_size};
+      @include apply-if-not-empty(flex-direction, $mobile_buttons_direction);
+      @include apply-if-not-empty(justify-content, $mobile_buttons_justify);
+      @include apply-if-not-empty(gap, $mobile_buttons_gap);
+      @include apply-if-not-empty(font, $mobile_buttons_font);
     }
   }
 
@@ -38,26 +40,22 @@ $parsedSettings: parseObjectSettings($links);
     display: flex;
     justify-content: center;
     align-items: center;
-    column-gap: 0.5em;
-    padding: 0.5em 0.65em;
-    flex: 0 0 #{$button_width};
-
+    column-gap: 0.5em;    
+    flex: 0 0 auto;
     text-wrap: nowrap;
-    font-weight: bold;
 
-    color: #{$button_color};
-    background-color: #{$button_background};
-
-    border-radius: #{$button_rounding};
-    box-shadow: inset 0px 0px 0px 2px #{$button_shadow_color};
-
-    &:visited {
-      color: #{$button_color};
-    }
+    @include apply-if-not-empty(padding, $button_padding);
+    @include apply-if-not-empty(flex-basis, $button_width);
+    @include apply-if-not-empty(border-radius, $button_rounding);
+    @include apply-if-not-empty(border, $button_border);
+    @include apply-if-not-empty(box-shadow, $button_shadow);
+    @include apply-if-not-empty(color, $button_color);
+    @include apply-if-not-empty(background-color, $button_background);   
 
     &:hover {
-      background-color: #{$button_background_hover};
-      color: #{$button_color};
+      @include apply-if-not-empty(background-color, $button_background_hover);
+      @include apply-if-not-empty(border, $button_border_hover);
+      @include apply-if-not-empty(color, $button_color_hover);
     }
 
     @for $index from 1 through length($parsedSettings) {
@@ -67,40 +65,22 @@ $parsedSettings: parseObjectSettings($links);
       @if $identifier == "" {
         $identifier: "bfl-link-#{$index - 1}";
       }
-
-      $width: #{map-get($item, "button_width")};
-      $borderRadius: #{map-get($item, "button_rounding")};
-      $background: #{map-get($item, "button_background")};
-      $backgroundHover: #{map-get($item, "button_background_hover")};
-      $shadowColor: #{map-get($item, "button_shadow_color")};
-      $color: #{map-get($item, "button_color")};
-
+      
       &.#{$identifier} {
-        @if $width != "" {
-          flex-basis: #{$width};
-        }
-
-        @if $borderRadius != "" {
-          border-radius: $borderRadius;
-        }
-
-        @if $background != "" {
-          background-color: $background;
-        }
-
-        @if $shadowColor != "" {
-          box-shadow: inset 0px 0px 0px 2px $shadowColor;
-        }
-
-        @if $color != "" {
-          color: $color;
-        }
+        @include apply-if-not-empty(flex-basis, map-get($item, "button_width"));
+        @include apply-if-not-empty(font, map-get($item, "button_font"));
+        @include apply-if-not-empty(padding, map-get($item, "button_padding"));
+        @include apply-if-not-empty(border-radius, map-get($item, "button_rounding"));
+        @include apply-if-not-empty(background-color, map-get($item, "button_background"));
+        @include apply-if-not-empty(color, map-get($item, "button_color"));
+        @include apply-if-not-empty(border, map-get($item, "button_border"));
+        @include apply-if-not-empty(box-shadow, map-get($item, "button_shadow"));
       }
 
-      @if $backgroundHover != "" {
-        &.#{$identifier}:hover {
-          background-color: $backgroundHover;
-        }
+      &.#{$identifier}:hover {
+        @include apply-if-not-empty(background-color, map-get($item, "button_background_hover"));
+        @include apply-if-not-empty(border, map-get($item, "button_border_hover"));
+        @include apply-if-not-empty(color, map-get($item, "button_color_hover"));
       }
     }
   }

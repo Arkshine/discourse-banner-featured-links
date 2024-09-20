@@ -47,6 +47,9 @@ links:
       button_width:
         type: string
         default: ""
+      button_font:
+        type: string
+        default: ""
       button_rounding:
         type: string
         default: ""
@@ -59,7 +62,16 @@ links:
       button_color:
         type: string
         default: ""
-      button_shadow_color:
+      button_color_hover:
+        type: string
+        default: ""
+      button_border:
+        type: string
+        default: ""
+      button_border_hover:
+        type: string
+        default: ""
+      button_shadow:
         type: string
         default: ""
       button_identifier:
@@ -112,7 +124,7 @@ buttons_justify:
 buttons_gap:
   type: string
   default: "1rem"
-buttons_font_size:
+buttons_font:
   type: string
   default: "var(--base-font-size)"
 mobile_buttons_justify:
@@ -134,12 +146,15 @@ mobile_buttons_direction:
   choices:
     - row
     - column
-mobile_buttons_font_size:
+mobile_buttons_font:
   type: string
   default: "var(--font-down-1)"
 button_width:
   type: string
   default: "auto"
+button_padding:
+  type: string
+  default: "0.5em 0.65em"
 button_rounding:
   type: string
   default: "8px"
@@ -152,6 +167,15 @@ button_background_hover:
 button_color:
   type: string
   default: "var(--secondary)"
-button_shadow_color:
+button_color_hover:
   type: string
-  default: "var(--tertiary-hover)"
+  default: ""
+button_border:
+  type: string
+  default: ""
+button_border_hover:
+  type: string
+  default: ""
+button_shadow:
+  type: string
+  default: "inset 0 0 0 2px var(--tertiary-hover)"
