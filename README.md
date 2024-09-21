@@ -53,12 +53,13 @@ I encourage you to try your own style!
 | `display on homepage` | Displays the links on the homepage. |
 | `url must contain` | Enter paths that should display the banner. Add <code>\*</code> to the end of the path as a wildcard. |
 | `plugin outlet` | The location to display the links.<br><details><summary>Common Locations</summary><code>above-main-container</code><code>above-site-header</code><code>after-header</code><code>before-header-panel</code><code>before-list-area</code><code>before-topic-list</code><code>below-site-header</code><code>header-list-container-bottom</code><code>topic-above-post-stream</code><br>Search Banner component:<br><code>search-banner-below-headline</code><code>search-banner-below-input</code></details> |
+| `svg_icons` | Add FontAwesome icons that aren't included in the default subset. |
 
 #### `links` setting:
 
 | Name   | Description                                                                                                                                                                                                                                                                            |
 | ------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Emoji  | The emoji to display for the links.<br><details><summary>Shortcuts</summary><div>Windows: <kbd>Win</kbd> + <kbd>.</kbd></div><div>Mac: <kbd>Cmd</kbd> + <kbd>Ctrl</kbd> + <kbd>Space</kbd></div><div>ChromeOS: <kbd>Launch</kbd> + <kbd>Shift</kbd> + <kbd>Space</kbd></div></details> |
+| Icon   | The <a href="https://fontawesome.com/v6/search?">FontAwesome</a> icon or emoji to display for the links.<br><details><summary>Shortcuts</summary><div>Windows: <kbd>Win</kbd> + <kbd>.</kbd></div><div>Mac: <kbd>Cmd</kbd> + <kbd>Ctrl</kbd> + <kbd>Space</kbd></div><div>ChromeOS: <kbd>Launch</kbd> + <kbd>Shift</kbd> + <kbd>Space</kbd></div></details> |
 | Title  | The title of the link.                                                                                                                                                                                                                                                                 |
 | URL    | The URL to link to.                                                                                                                                                                                                                                                                    |
 | Target | Opens the linked document:<br><code>\_blank</code>: in a new window or tab (this is default)<br><code>\_self</code>: in the same frame as it was clicked<br><code>\_parent</code>: in the parent frame<br><code>\_top</code>: in the full body of the window.                          |

@@ -6,6 +6,7 @@ import concatClass from "discourse/helpers/concat-class";
 import replaceEmoji from "discourse/helpers/replace-emoji";
 import { defaultHomepage } from "discourse/lib/utilities";
 import htmlSafe from "discourse-common/helpers/html-safe";
+import { iconHTML } from "discourse-common/lib/icon-library";
 
 export default class BannerFeaturedLinks extends Component {
   @service currentUser;
@@ -56,11 +57,23 @@ export default class BannerFeaturedLinks extends Component {
     return this.displayForUser && this.displayOnDevice && this.showOnRoute;
   }
 
+  get links() {
+    return this.featuredLinks.map((link) => {
+      if (link?.icon.length) {
+        link.icon = /[\w-]+/.test(link.icon)
+          ? iconHTML(link.icon)
+          : replaceEmoji(link.icon);
+      }
+
+      return link;
+    });
+  }
+
   <template>
     {{#if this.shoudlDisplay}}
       <aside class="banner-featured-links__wrapper {{settings.plugin_outlet}}">
         <nav class="banner-featured-links__wrapper-links">
-          {{#each this.featuredLinks as |link index|}}
+          {{#each this.links as |link index|}}
             <a
               class={{concatClass
                 "banner-featured-links__link"
@@ -71,8 +84,8 @@ export default class BannerFeaturedLinks extends Component {
               target={{link.target}}
               alt={{htmlSafe link.text}}
             >
-              {{#if link.emoji}}
-                {{replaceEmoji link.emoji}}
+              {{#if link.icon}}
+                {{htmlSafe link.icon}}
               {{/if}}
               {{htmlSafe link.text}}
             </a>

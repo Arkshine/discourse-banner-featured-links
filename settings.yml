@@ -21,7 +21,7 @@ links:
     name: link
     identifier: text
     properties:
-      emoji:
+      icon:
         type: string
         validations:
           min: 1
@@ -99,6 +99,10 @@ url_must_contain:
 plugin_outlet:
   default: above-main-container
   type: string
+svg_icons:
+  type: "list"
+  list_type: "compact"
+  default: ""
 buttons_wrapper_max_width:
   type: string
   default: "100%"

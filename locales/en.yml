@@ -9,11 +9,11 @@ en:
           You can choose who can access the links and on which devices they should be displayed.
         schema:
           properties:
-            emoji:
-              label: Emoji
+            icon:
+              label: Icon
               description: >
-                The emoji to display for the links.<br>
-                <details><summary>Shortcuts</summary><div>Windows: <kbd>Win</kbd> + <kbd>.</kbd></div><div>Mac: <kbd>Cmd</kbd> + <kbd>Ctrl</kbd> + <kbd>Space</kbd></div><div>ChromeOS: <kbd>Launch</kbd> + <kbd>Shift</kbd> + <kbd>Space</kbd></div></details>
+                The <a href="https://fontawesome.com/v6/search?">FontAwesome</a> icon or emoji to display for the links.<br>
+                <details><summary>Shortcuts for emoji</summary><div>Windows: <kbd>Win</kbd> + <kbd>.</kbd></div><div>Mac: <kbd>Cmd</kbd> + <kbd>Ctrl</kbd> + <kbd>Space</kbd></div><div>ChromeOS: <kbd>Launch</kbd> + <kbd>Shift</kbd> + <kbd>Space</kbd></div></details>
             text:
               label: Title
               description: The title of the link.
@@ -117,6 +117,9 @@ en:
           <code>search-banner-below-headline</code>
           <code>search-banner-below-input</code>
           </details>
+      svg_icons:
+        description: |
+          Add FontAwesome icons that aren't included in the default subset.
           <br><br><br>
           <h2>Global Styling</h2>
           Customize the default spacing and look of the links.<br>

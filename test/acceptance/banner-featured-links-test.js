@@ -4,38 +4,34 @@ import { acceptance } from "discourse/tests/helpers/qunit-helpers";
 
 const linksFixtures = [
   {
-    emoji: "📣",
+    icon: "cog",
     text: "Announcement",
     url: "https://meta.discourse.org/c/announcements/67",
     target: "_blank",
   },
   {
-    emoji: "📚",
+    icon: "📚",
     text: "Documentation",
     url: "https://meta.discourse.org/c/documentation/10",
     target: "_blank",
   },
   {
-    emoji: "🛠️",
+    icon: "🛠️",
     text: "Support",
     url: "https://meta.discourse.org/c/support/6",
     target: "_blank",
   },
   {
-    emoji: "🎨",
+    icon: "🎨",
     text: "Customize",
     url: "https://meta.discourse.org/t/beginners-guide-to-developing-discourse-themes/93648",
     target: "_blank",
   },
 ];
 
-acceptance("Banned Featured Links", function (needs) {
-  needs.settings({
-    links: linksFixtures,
-    plugin_outlet: "above-site-header",
-  });
-
+acceptance("Banned Featured Links", function () {
   test("it renders the links", async function (assert) {
+    settings.links = linksFixtures;
     await visit("/");
 
     assert
@@ -44,6 +40,7 @@ acceptance("Banned Featured Links", function (needs) {
   });
 
   test("it renders the banner with the correct links", async function (assert) {
+    settings.links = linksFixtures;
     await visit("/");
 
     assert
@@ -72,6 +69,7 @@ acceptance("Banned Featured Links", function (needs) {
   });
 
   test("it renders the links on the homepage", async function (assert) {
+    settings.links = linksFixtures;
     settings.display_on_homepage = true;
     settings.url_must_contain = "";
 
@@ -83,6 +81,7 @@ acceptance("Banned Featured Links", function (needs) {
   });
 
   test("it doesn't render the links on the homepage", async function (assert) {
+    settings.links = linksFixtures;
     settings.display_on_homepage = false;
     settings.url_must_contain = "";
 
@@ -94,6 +93,7 @@ acceptance("Banned Featured Links", function (needs) {
   });
 
   test("it renders the links on a set route", async function (assert) {
+    settings.links = linksFixtures;
     settings.display_on_homepage = false;
     settings.url_must_contain = "/c/*";
 
@@ -104,6 +104,7 @@ acceptance("Banned Featured Links", function (needs) {
   });
 
   test("it doesn't render the links on other routes", async function (assert) {
+    settings.links = linksFixtures;
     settings.display_on_homepage = false;
     settings.url_must_contain = "/c/*";
 
@@ -115,14 +116,10 @@ acceptance("Banned Featured Links", function (needs) {
   });
 });
 
-acceptance("Banned Featured Links - Logged out", function (needs) {
-  needs.settings({
-    links: linksFixtures,
-    plugin_outlet: "above-site-header",
-    display_on_homepage: true,
-  });
-
+acceptance("Banned Featured Links - Logged out", function () {
   test("links can be hidden from anons", async function (assert) {
+    settings.links = linksFixtures;
+    settings.display_on_homepage = true;
     settings.show_for_anon = false;
 
     await visit("/");
@@ -133,6 +130,8 @@ acceptance("Banned Featured Links - Logged out", function (needs) {
   });
 
   test("links can be shown to anons", async function (assert) {
+    settings.links = linksFixtures;
+    settings.display_on_homepage = true;
     settings.show_for_anon = true;
 
     await visit("/");
@@ -145,13 +144,10 @@ acceptance("Banned Featured Links - Logged out", function (needs) {
 
 acceptance("Banned Featured Links - Logged in", function (needs) {
   needs.user();
-  needs.settings({
-    links: linksFixtures,
-    plugin_outlet: "above-site-header",
-    display_on_homepage: true,
-  });
 
   test("links can be hidden from members", async function (assert) {
+    settings.links = linksFixtures;
+    settings.display_on_homepage = true;
     settings.show_for_members = false;
 
     await visit("/");
@@ -162,6 +158,8 @@ acceptance("Banned Featured Links - Logged in", function (needs) {
   });
 
   test("links can be shown to members", async function (assert) {
+    settings.links = linksFixtures;
+    settings.display_on_homepage = true;
     settings.show_for_members = true;
 
     await visit("/");
@@ -174,13 +172,10 @@ acceptance("Banned Featured Links - Logged in", function (needs) {
 
 acceptance("Banned Featured Links - Mobile", function (needs) {
   needs.mobileView();
-  needs.settings({
-    links: linksFixtures,
-    plugin_outlet: "above-site-header",
-    display_on_homepage: true,
-  });
 
   test("links can be shown on mobile", async function (assert) {
+    settings.links = linksFixtures;
+    settings.display_on_homepage = true;
     settings.display_on_mobile = true;
 
     await visit("/");
@@ -191,6 +186,8 @@ acceptance("Banned Featured Links - Mobile", function (needs) {
   });
 
   test("links can be hidden on mobile 1", async function (assert) {
+    settings.links = linksFixtures;
+    settings.display_on_homepage = true;
     settings.display_on_mobile = false;
 
     await visit("/");
@@ -201,6 +198,8 @@ acceptance("Banned Featured Links - Mobile", function (needs) {
   });
 
   test("links can be hidden on mobile 2", async function (assert) {
+    settings.links = linksFixtures;
+    settings.display_on_homepage = true;
     settings.display_on_mobile = false;
     settings.display_on_desktop = true;
 
@@ -212,14 +211,11 @@ acceptance("Banned Featured Links - Mobile", function (needs) {
   });
 });
 
-acceptance("Banned Featured Links - Desktop", function (needs) {
-  needs.settings({
-    links: linksFixtures,
-    plugin_outlet: "above-site-header",
-    display_on_homepage: true,
-  });
-
+acceptance("Banned Featured Links - Desktop", function () {
   test("links can be shown on desktop", async function (assert) {
+    settings.links = linksFixtures;
+    settings.display_on_homepage = true;
+    settings.display_on_mobile = true;
     settings.display_on_desktop = true;
 
     await visit("/");
@@ -230,6 +226,8 @@ acceptance("Banned Featured Links - Desktop", function (needs) {
   });
 
   test("links can be hidden on desktop 1", async function (assert) {
+    settings.links = linksFixtures;
+    settings.display_on_homepage = true;
     settings.display_on_desktop = false;
 
     await visit("/");
@@ -240,6 +238,8 @@ acceptance("Banned Featured Links - Desktop", function (needs) {
   });
 
   test("links can be hidden on desktop 2", async function (assert) {
+    settings.links = linksFixtures;
+    settings.display_on_homepage = true;
     settings.display_on_mobile = true;
     settings.display_on_desktop = false;
 
@@ -248,5 +248,29 @@ acceptance("Banned Featured Links - Desktop", function (needs) {
     assert
       .dom(".banner-featured-links__wrapper")
       .doesNotExist("doesn't show the links on desktop 2");
+  });
+});
+
+acceptance("Banned Featured Links - Icon", function () {
+  test("it renders the SVG icon", async function (assert) {
+    settings.links = linksFixtures;
+    settings.plugin_outlet = "above-site-header";
+
+    await visit("/");
+
+    assert
+      .dom(".banner-featured-links__wrapper-links > a:first-child > svg")
+      .exists("The svg icon is present");
+  });
+
+  test("it renders the emoji", async function (assert) {
+    settings.links = linksFixtures;
+    settings.plugin_outlet = "above-site-header";
+
+    await visit("/");
+
+    assert
+      .dom(".banner-featured-links__wrapper-links > a:last-child > img.emoji")
+      .exists("The emoji image is present");
   });
 });
