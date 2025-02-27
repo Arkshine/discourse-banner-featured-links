@@ -1,12 +1,12 @@
 import Component from "@glimmer/component";
 import { tracked } from "@glimmer/tracking";
 import { concat } from "@ember/helper";
-import { inject as service } from "@ember/service";
+import { service } from "@ember/service";
 import concatClass from "discourse/helpers/concat-class";
+import htmlSafe from "discourse/helpers/html-safe";
 import replaceEmoji from "discourse/helpers/replace-emoji";
+import { iconHTML } from "discourse/lib/icon-library";
 import { defaultHomepage } from "discourse/lib/utilities";
-import htmlSafe from "discourse-common/helpers/html-safe";
-import { iconHTML } from "discourse-common/lib/icon-library";
 
 export default class BannerFeaturedLinks extends Component {
   @service currentUser;
