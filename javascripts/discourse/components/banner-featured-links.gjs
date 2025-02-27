@@ -59,7 +59,7 @@ export default class BannerFeaturedLinks extends Component {
 
   get links() {
     return this.featuredLinks.map((link) => {
-      if (link?.icon.length) {
+      if (link?.icon?.length) {
         link.icon = /[\w-]+/.test(link.icon)
           ? iconHTML(link.icon)
           : replaceEmoji(link.icon);

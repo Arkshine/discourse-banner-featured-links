@@ -4,9 +4,14 @@ import { acceptance } from "discourse/tests/helpers/qunit-helpers";
 
 const linksFixtures = [
   {
-    icon: "cog",
+    icon: "gear",
     text: "Announcement",
     url: "https://meta.discourse.org/c/announcements/67",
+    target: "_blank",
+  },
+  {
+    text: "About",
+    url: "https://meta.discourse.org/about",
     target: "_blank",
   },
   {
@@ -45,7 +50,7 @@ acceptance("Banned Featured Links", function () {
 
     assert
       .dom(".banner-featured-links__link")
-      .exists({ count: 4 }, "The banner has 3 links");
+      .exists({ count: 5 }, "The banner has 5 links");
 
     assert
       .dom(".banner-featured-links__link")
