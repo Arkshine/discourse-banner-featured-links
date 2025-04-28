@@ -52,14 +52,14 @@ $parsedSettings: parseObjectSettings($links);
     @include apply-if-not-empty(color, $button_color);
     @include apply-if-not-empty(background-color, $button_background);
 
+    &:visited {
+      @include apply-if-not-empty(color, $button_color);
+    }
+
     &:hover {
       @include apply-if-not-empty(background-color, $button_background_hover);
       @include apply-if-not-empty(border, $button_border_hover);
       @include apply-if-not-empty(color, $button_color_hover);
-    }
-
-    &:visited {
-      @include apply-if-not-empty(color, $button_color);
     }
 
     @for $index from 1 through length($parsedSettings) {
