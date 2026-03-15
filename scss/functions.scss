@@ -79,11 +79,11 @@
 }
 
 /**
- * Parses a string of ruby-like key-value pairs into a map.
+ * Parses a string of ruby-like key-value pairs into a list of maps.
  * Format: [{"key1"=>"value1", "key2"=>"value2"}, {"key1"=>"value1","key2"=>"value2"}]
  *
  * @param {String} $string - The string of key-value pairs.
- * @return {Map} - The map of key-value pairs.
+ * @return {List} - A list of maps of key-value pairs.
  */
 @function parse-object-settings($string) {
   $string: string.slice($string, 2, -2);

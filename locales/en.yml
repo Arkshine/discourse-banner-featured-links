@@ -111,7 +111,7 @@ en:
               <li><code>header-list-container-bottom</code></li>
               <li><code>topic-above-post-stream</code></li>
             </ul>
-            Search Banner component:<br>
+            Welcome Banner:<br>
             <ul>
               <li><code>welcome-banner-below-headline</code></li>
               <li><code>welcome-banner-below-input</code></li>
