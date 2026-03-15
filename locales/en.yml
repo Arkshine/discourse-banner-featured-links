@@ -114,8 +114,8 @@ en:
           <code>topic-above-post-stream</code><br>
 
           Search Banner component:<br>
-          <code>search-banner-below-headline</code>
-          <code>search-banner-below-input</code>
+          <code>welcome-banner-below-headline</code>
+          <code>welcome-banner-below-input</code>
           </details>
       svg_icons:
         description: |
