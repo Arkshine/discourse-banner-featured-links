@@ -34,7 +34,7 @@ const linksFixtures = [
   },
 ];
 
-acceptance("Banned Featured Links", function () {
+acceptance("Banner Featured Links", function () {
   test("it renders the links", async function (assert) {
     settings.links = linksFixtures;
     await visit("/");
@@ -116,12 +116,57 @@ acceptance("Banned Featured Links", function () {
     await visit("/u");
 
     assert
-      .dom(".banner-box")
+      .dom(".banner-featured-links__wrapper")
       .doesNotExist("does not show the banner on the /u route");
+  });
+
+  test("it renders the links with multiple pipe-separated paths", async function (assert) {
+    settings.links = linksFixtures;
+    settings.display_on_homepage = false;
+    settings.url_must_contain = "/latest|/c/*";
+
+    await visit("/c/1");
+
+    assert
+      .dom(".banner-featured-links__wrapper")
+      .exists("shows the banner on /c/* route from pipe-separated paths");
+  });
+
+  test("it renders on an exact url_must_contain match", async function (assert) {
+    settings.links = linksFixtures;
+    settings.display_on_homepage = false;
+    settings.url_must_contain = "/u";
+
+    await visit("/u");
+
+    assert
+      .dom(".banner-featured-links__wrapper")
+      .exists("shows the banner on exact /u match");
+  });
+
+  test("it does not render when links array is empty", async function (assert) {
+    settings.links = [];
+
+    await visit("/");
+
+    assert
+      .dom(".banner-featured-links__link")
+      .doesNotExist("no link elements are rendered");
+  });
+
+  test("it applies plugin_outlet as a class on the wrapper", async function (assert) {
+    settings.links = linksFixtures;
+    settings.plugin_outlet = "above-site-header";
+
+    await visit("/");
+
+    assert
+      .dom(".banner-featured-links__wrapper.above-site-header")
+      .exists("the wrapper has the plugin_outlet class");
   });
 });
 
-acceptance("Banned Featured Links - Logged out", function () {
+acceptance("Banner Featured Links - Logged out", function () {
   test("links can be hidden from anons", async function (assert) {
     settings.links = linksFixtures;
     settings.display_on_homepage = true;
@@ -147,7 +192,7 @@ acceptance("Banned Featured Links - Logged out", function () {
   });
 });
 
-acceptance("Banned Featured Links - Logged in", function (needs) {
+acceptance("Banner Featured Links - Logged in", function (needs) {
   needs.user();
 
   test("links can be hidden from members", async function (assert) {
@@ -175,7 +220,7 @@ acceptance("Banned Featured Links - Logged in", function (needs) {
   });
 });
 
-acceptance("Banned Featured Links - Mobile", function (needs) {
+acceptance("Banner Featured Links - Mobile", function (needs) {
   needs.mobileView();
 
   test("links can be shown on mobile", async function (assert) {
@@ -216,7 +261,7 @@ acceptance("Banned Featured Links - Mobile", function (needs) {
   });
 });
 
-acceptance("Banned Featured Links - Desktop", function () {
+acceptance("Banner Featured Links - Desktop", function () {
   test("links can be shown on desktop", async function (assert) {
     settings.links = linksFixtures;
     settings.display_on_homepage = true;
@@ -256,7 +301,7 @@ acceptance("Banned Featured Links - Desktop", function () {
   });
 });
 
-acceptance("Banned Featured Links - Icon", function () {
+acceptance("Banner Featured Links - Icon", function () {
   test("it renders the SVG icon", async function (assert) {
     settings.links = linksFixtures;
     settings.plugin_outlet = "above-site-header";
@@ -277,5 +322,36 @@ acceptance("Banned Featured Links - Icon", function () {
     assert
       .dom(".banner-featured-links__wrapper-links > a:last-child > img.emoji")
       .exists("The emoji image is present");
+  });
+
+  test("it does not render an icon for a link without one", async function (assert) {
+    settings.links = linksFixtures;
+
+    await visit("/");
+
+    const secondLink = document.querySelectorAll(
+      ".banner-featured-links__link"
+    )[1];
+
+    assert.dom("svg", secondLink).doesNotExist("no SVG icon is rendered");
+    assert.dom("img.emoji", secondLink).doesNotExist("no emoji is rendered");
+  });
+
+  test("it applies button_identifier as a CSS class", async function (assert) {
+    settings.links = [
+      {
+        icon: "gear",
+        text: "Custom",
+        url: "https://example.com",
+        target: "_blank",
+        button_identifier: "my-custom-link",
+      },
+    ];
+
+    await visit("/");
+
+    assert
+      .dom(".banner-featured-links__link.my-custom-link")
+      .exists("the link has the button_identifier class");
   });
 });

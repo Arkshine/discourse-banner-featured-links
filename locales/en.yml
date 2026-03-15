@@ -17,9 +17,6 @@ en:
             text:
               label: Title
               description: The title of the link.
-            description:
-              label: Description
-              description: The description of the link.
             url:
               label: URL
               description: The URL to link to.
@@ -102,20 +99,23 @@ en:
         description: |
           The location to display the links.<br>
           <details>
-          <summary>Common Locations</summary>
-          <code>above-main-container</code>
-          <code>above-site-header</code>
-          <code>after-header</code>
-          <code>before-header-panel</code>
-          <code>before-list-area</code>
-          <code>before-topic-list</code>
-          <code>below-site-header</code>
-          <code>header-list-container-bottom</code>
-          <code>topic-above-post-stream</code><br>
-
-          Search Banner component:<br>
-          <code>search-banner-below-headline</code>
-          <code>search-banner-below-input</code>
+            <summary>Common Locations</summary>
+            <ul>
+              <li><code>above-main-container</code></li>
+              <li><code>above-site-header</code></li>
+              <li><code>after-header</code></li>
+              <li><code>before-header-panel</code></li>
+              <li><code>before-list-area</code></li>
+              <li><code>before-topic-list</code></li>
+              <li><code>below-site-header</code></li>
+              <li><code>header-list-container-bottom</code></li>
+              <li><code>topic-above-post-stream</code></li>
+            </ul>
+            Welcome Banner:<br>
+            <ul>
+              <li><code>welcome-banner-below-headline</code></li>
+              <li><code>welcome-banner-below-input</code></li>
+            </ul>
           </details>
       svg_icons:
         description: |

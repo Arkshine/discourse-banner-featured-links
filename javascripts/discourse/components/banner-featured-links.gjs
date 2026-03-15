@@ -1,9 +1,8 @@
 import Component from "@glimmer/component";
-import { tracked } from "@glimmer/tracking";
 import { concat } from "@ember/helper";
 import { service } from "@ember/service";
+import { trustHTML } from "@ember/template";
 import concatClass from "discourse/helpers/concat-class";
-import htmlSafe from "discourse/helpers/html-safe";
 import replaceEmoji from "discourse/helpers/replace-emoji";
 import { iconHTML } from "discourse/lib/icon-library";
 import { defaultHomepage } from "discourse/lib/utilities";
@@ -11,10 +10,7 @@ import { defaultHomepage } from "discourse/lib/utilities";
 export default class BannerFeaturedLinks extends Component {
   @service currentUser;
   @service router;
-  @service siteSettings;
   @service site;
-
-  @tracked featuredLinks = settings.links;
 
   get showOnRoute() {
     if (
@@ -53,24 +49,26 @@ export default class BannerFeaturedLinks extends Component {
     );
   }
 
-  get shoudlDisplay() {
+  get shouldDisplay() {
     return this.displayForUser && this.displayOnDevice && this.showOnRoute;
   }
 
   get links() {
-    return this.featuredLinks.map((link) => {
+    return settings.links.map((link) => {
       if (link?.icon?.length) {
-        link.iconHtml = /[\w-]+/.test(link.icon)
-          ? iconHTML(link.icon)
-          : replaceEmoji(link.icon);
+        return {
+          ...link,
+          iconHtml: /[\w-]+/.test(link.icon)
+            ? iconHTML(link.icon)
+            : replaceEmoji(link.icon),
+        };
       }
-
       return link;
     });
   }
 
   <template>
-    {{#if this.shoudlDisplay}}
+    {{#if this.shouldDisplay}}
       <aside class="banner-featured-links__wrapper {{settings.plugin_outlet}}">
         <nav class="banner-featured-links__wrapper-links">
           {{#each this.links as |link index|}}
@@ -82,12 +80,12 @@ export default class BannerFeaturedLinks extends Component {
               }}
               href={{link.url}}
               target={{link.target}}
-              alt={{htmlSafe link.text}}
+              title={{link.text}}
             >
               {{#if link.iconHtml}}
-                {{htmlSafe link.iconHtml}}
+                {{trustHTML link.iconHtml}}
               {{/if}}
-              {{htmlSafe link.text}}
+              {{link.text}}
             </a>
           {{/each}}
         </nav>

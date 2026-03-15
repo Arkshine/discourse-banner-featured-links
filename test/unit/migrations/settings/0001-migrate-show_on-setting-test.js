@@ -58,5 +58,34 @@ module(
         );
       });
     });
+
+    test("migrate with unknown value defaults to homepage", function (assert) {
+      const settings = new Map(Object.entries({ show_on: "foobar" }));
+      const result = migrate(settings);
+
+      const expectedResult = new Map(
+        Object.entries({
+          display_on_homepage: true,
+          url_must_contain: "",
+        })
+      );
+
+      assert.deepEqual(
+        Object.fromEntries(result.entries()),
+        Object.fromEntries(expectedResult.entries())
+      );
+    });
+
+    test("does nothing when show_on key is absent", function (assert) {
+      const settings = new Map(
+        Object.entries({ display_on_homepage: true, url_must_contain: "/top" })
+      );
+      const result = migrate(settings);
+
+      assert.deepEqual(Object.fromEntries(result.entries()), {
+        display_on_homepage: true,
+        url_must_contain: "/top",
+      });
+    });
   }
 );
