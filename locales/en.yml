@@ -17,9 +17,6 @@ en:
             text:
               label: Title
               description: The title of the link.
-            description:
-              label: Description
-              description: The description of the link.
             url:
               label: URL
               description: The URL to link to.
