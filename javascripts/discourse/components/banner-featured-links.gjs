@@ -2,8 +2,8 @@ import Component from "@glimmer/component";
 import { tracked } from "@glimmer/tracking";
 import { concat } from "@ember/helper";
 import { service } from "@ember/service";
+import { trustHTML } from "@ember/template";
 import concatClass from "discourse/helpers/concat-class";
-import htmlSafe from "discourse/helpers/html-safe";
 import replaceEmoji from "discourse/helpers/replace-emoji";
 import { iconHTML } from "discourse/lib/icon-library";
 import { defaultHomepage } from "discourse/lib/utilities";
@@ -53,7 +53,7 @@ export default class BannerFeaturedLinks extends Component {
     );
   }
 
-  get shoudlDisplay() {
+  get shouldDisplay() {
     return this.displayForUser && this.displayOnDevice && this.showOnRoute;
   }
 
@@ -70,7 +70,7 @@ export default class BannerFeaturedLinks extends Component {
   }
 
   <template>
-    {{#if this.shoudlDisplay}}
+    {{#if this.shouldDisplay}}
       <aside class="banner-featured-links__wrapper {{settings.plugin_outlet}}">
         <nav class="banner-featured-links__wrapper-links">
           {{#each this.links as |link index|}}
@@ -82,12 +82,12 @@ export default class BannerFeaturedLinks extends Component {
               }}
               href={{link.url}}
               target={{link.target}}
-              alt={{htmlSafe link.text}}
+              alt={{trustHTML link.text}}
             >
               {{#if link.iconHtml}}
-                {{htmlSafe link.iconHtml}}
+                {{trustHTML link.iconHtml}}
               {{/if}}
-              {{htmlSafe link.text}}
+              {{trustHTML link.text}}
             </a>
           {{/each}}
         </nav>

@@ -29,5 +29,37 @@ module(
         Object.fromEntries(expectedResult.entries())
       );
     });
+
+    test("does nothing when links is absent", function (assert) {
+      const settings = new Map(Object.entries({ other_setting: "value" }));
+      const result = migrate(settings);
+
+      assert.deepEqual(Object.fromEntries(result.entries()), {
+        other_setting: "value",
+      });
+    });
+
+    test("does nothing when link has no emoji key", function (assert) {
+      const settings = new Map(
+        Object.entries({
+          links: [
+            {
+              icon: "gear",
+              text: "Hello",
+            },
+          ],
+        })
+      );
+      const result = migrate(settings);
+
+      assert.deepEqual(Object.fromEntries(result.entries()), {
+        links: [
+          {
+            icon: "gear",
+            text: "Hello",
+          },
+        ],
+      });
+    });
   }
 );
