@@ -85,7 +85,7 @@
  * @param {String} $string - The string of key-value pairs.
  * @return {Map} - The map of key-value pairs.
  */
-@function parseObjectSettings($string) {
+@function parse-object-settings($string) {
   $string: string.slice($string, 2, -2);
   $items: str-split($string, "}, {");
   $parsedItems: ();

@@ -9,7 +9,7 @@
   }
 }
 
-$parsedSettings: parseobjectsettings($links);
+$parsedSettings: parse-object-settings($links);
 
 .banner-featured-links {
   &__wrapper {
