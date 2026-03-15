@@ -334,9 +334,7 @@ acceptance("Banner Featured Links - Icon", function () {
     )[1];
 
     assert.dom("svg", secondLink).doesNotExist("no SVG icon is rendered");
-    assert
-      .dom("img.emoji", secondLink)
-      .doesNotExist("no emoji is rendered");
+    assert.dom("img.emoji", secondLink).doesNotExist("no emoji is rendered");
   });
 
   test("it applies button_identifier as a CSS class", async function (assert) {
