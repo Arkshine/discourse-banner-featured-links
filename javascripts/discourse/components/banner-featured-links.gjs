@@ -11,7 +11,6 @@ import { defaultHomepage } from "discourse/lib/utilities";
 export default class BannerFeaturedLinks extends Component {
   @service currentUser;
   @service router;
-  @service siteSettings;
   @service site;
 
   @tracked featuredLinks = settings.links;
