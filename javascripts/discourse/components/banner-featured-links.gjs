@@ -80,12 +80,12 @@ export default class BannerFeaturedLinks extends Component {
               }}
               href={{link.url}}
               target={{link.target}}
-              title={{trustHTML link.text}}
+              title={{link.text}}
             >
               {{#if link.iconHtml}}
                 {{trustHTML link.iconHtml}}
               {{/if}}
-              {{trustHTML link.text}}
+              {{link.text}}
             </a>
           {{/each}}
         </nav>
