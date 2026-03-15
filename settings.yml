@@ -173,7 +173,7 @@ button_color:
   default: "var(--secondary)"
 button_color_hover:
   type: string
-  default: ""
+  default: "var(--secondary)"
 button_border:
   type: string
   default: ""
