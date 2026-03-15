@@ -17,7 +17,7 @@ $parsedSettings: parseObjectSettings($links);
     @include apply-if-not-empty(max-width, $buttons_wrapper_max_width);
 
     @include viewport.until(sm) {
-      @include apply-if-not-empty(margin, $mobile_buttons_wrapper_max_width);
+      @include apply-if-not-empty(margin, $mobile_buttons_wrapper_margin);
       @include apply-if-not-empty(max-width, $mobile_buttons_wrapper_max_width);
     }
   }
