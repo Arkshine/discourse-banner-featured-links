@@ -1,5 +1,4 @@
 import Component from "@glimmer/component";
-import { tracked } from "@glimmer/tracking";
 import { concat } from "@ember/helper";
 import { service } from "@ember/service";
 import { trustHTML } from "@ember/template";
@@ -12,8 +11,6 @@ export default class BannerFeaturedLinks extends Component {
   @service currentUser;
   @service router;
   @service site;
-
-  @tracked featuredLinks = settings.links;
 
   get showOnRoute() {
     if (
@@ -57,13 +54,15 @@ export default class BannerFeaturedLinks extends Component {
   }
 
   get links() {
-    return this.featuredLinks.map((link) => {
+    return settings.links.map((link) => {
       if (link?.icon?.length) {
-        link.iconHtml = /[\w-]+/.test(link.icon)
-          ? iconHTML(link.icon)
-          : replaceEmoji(link.icon);
+        return {
+          ...link,
+          iconHtml: /[\w-]+/.test(link.icon)
+            ? iconHTML(link.icon)
+            : replaceEmoji(link.icon),
+        };
       }
-
       return link;
     });
   }
